@@ -1,6 +1,7 @@
 import time
 import sys
 import os
+from random import randint
 
 class bcolors:
     HEADER = '\033[95m'
@@ -13,10 +14,10 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 # this goes question : response
-script = {
-    "What is the derivative of arcsin(x)?":"What do YOU think the derivative of arcsin(x) is?",
-    "...I don't know.":"Well you wrote me, so how the hell do you expect me to know?"
-}
+script = [
+    ["What is the derivative of arcsin(x)?","What do YOU think the derivative of arcsin(x) is?"],
+    ["...I don't know.","Well you wrote me, so how the hell do you expect me to know?"]
+]
 
 def spinning_cursor():
     while True:
@@ -27,17 +28,37 @@ def spinning_cursor():
 def welcome_message():
     print ""
     print ""
-    print bcolors.OKBLUE + "loading N.A.S.I.R." + bcolors.ENDC,
+    print bcolors.OKBLUE + "Booting Nascent Artificial Sourced Intelligence Routine (NASIR)" + bcolors.ENDC,
     print_ellipse(10)
     print ""
     print ""
-    print bcolors.WARNING + "Sup?" + bcolors.ENDC
+    print bcolors.WARNING + "What's good fam?" + bcolors.ENDC
 
 def exit_message():
+    print ""
     print "Adios."
     print_thinking(4)
     os.system('clear')
 
+def delay_ai_print(s):
+    print ""
+    print ""
+    for c in s:
+        sys.stdout.write( '%s' % c )
+        sys.stdout.flush()
+        time.sleep(0.05)
+
+def delay_human_print(s):
+    print ""
+    print ""
+    print "> ",
+    time.sleep(2)
+
+    for c in s:
+        sys.stdout.write( '%s' % c )
+        sys.stdout.flush()
+	delay = 0.05 * randint(1, 6)
+        time.sleep(delay)
 
 def print_ellipse(number):
     for i in range(0,number):
@@ -46,6 +67,8 @@ def print_ellipse(number):
         sys.stdout.flush()
 
 def print_thinking(number):
+    print ""
+    print ""
     spinner = spinning_cursor()
     for _ in range(number):
         sys.stdout.write(spinner.next())
@@ -78,11 +101,16 @@ def input_command():
     verify_response(question)
 
 def main():
-    input_command()
-
+    for i in script:
+        delay_human_print(i[0])
+        print_thinking(5)
+        delay_ai_print(i[1])
+    delay_human_print("exit")
+    exit_message()
+        
+      
 if __name__ == "__main__":
     os.system('clear')
     welcome_message()
     main()
-
 
