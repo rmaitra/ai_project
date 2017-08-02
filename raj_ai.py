@@ -27,12 +27,11 @@ def spinning_cursor():
 
 def welcome_message():
     print ""
-    print ""
     print bcolors.OKBLUE + "Booting Nascent Artificial Sourced Intelligence Routine (NASIR)" + bcolors.ENDC,
-    print_ellipse(10)
+    print_ellipse(5)
     print ""
     print ""
-    print bcolors.WARNING + "What's good fam?" + bcolors.ENDC
+    print bcolors.WARNING + bcolors.BOLD + "What's good fam?" + bcolors.ENDC
 
 def exit_message():
     print ""
@@ -42,16 +41,17 @@ def exit_message():
 
 def delay_ai_print(s):
     print ""
-    print ""
+    print bcolors.BOLD
     for c in s:
         sys.stdout.write( '%s' % c )
         sys.stdout.flush()
         time.sleep(0.05)
+    print bcolors.ENDC
 
 def delay_human_print(s):
-    print ""
-    print ""
+    print bcolors.OKGREEN
     print "> ",
+    sys.stdout.flush()
     time.sleep(2)
 
     for c in s:
@@ -59,6 +59,7 @@ def delay_human_print(s):
         sys.stdout.flush()
 	delay = 0.05 * randint(1, 6)
         time.sleep(delay)
+    print bcolors.ENDC
 
 def print_ellipse(number):
     for i in range(0,number):
@@ -68,42 +69,19 @@ def print_ellipse(number):
 
 def print_thinking(number):
     print ""
-    print ""
     spinner = spinning_cursor()
     for _ in range(number):
         sys.stdout.write(spinner.next())
         sys.stdout.flush()
         time.sleep(0.1)
         sys.stdout.write('\b')
-
-def print_ai_response(text):
-    print ""
-    print bcolors.WARNING + text + bcolors.ENDC
-
-def verify_response(question):
-    if(question == 'exit'):
-        exit_message()
-
-    if(question in script.keys()):
-        print_thinking(15)
-        sys.stdout.write('\b')
-        print_ai_response(script[question])
-        input_command()
-
-    else:
-        print_thinking(15)
-        sys.stdout.write('\b')
-        print bcolors.WARNING + "Um...I dunno." + bcolors.ENDC
-        input_command()
-
-def input_command():
-    question = raw_input('> ')
-    verify_response(question)
+    sys.stdout.write('\b')
+    sys.stdout.flush()
 
 def main():
     for i in script:
         delay_human_print(i[0])
-        print_thinking(5)
+        print_thinking(4)
         delay_ai_print(i[1])
     delay_human_print("exit")
     exit_message()
