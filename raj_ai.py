@@ -4,6 +4,8 @@ import os
 from random import randint
 
 class bcolors:
+    CURSOR_UP_ONE = '\x1b[1A'
+    ERASE_LINE = '\x1b[2K'
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
     OKGREEN = '\033[92m'
@@ -76,6 +78,7 @@ def print_thinking(number):
         time.sleep(0.1)
         sys.stdout.write('\b')
     sys.stdout.write('\b')
+    print(bcolors.CURSOR_UP_ONE + bcolors.ERASE_LINE)
     sys.stdout.flush()
 
 def main():
