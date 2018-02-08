@@ -17,8 +17,14 @@ class bcolors:
 
 # this goes question : response
 script = [
-    ["What is the derivative of arcsin(x)?","What do YOU think the derivative of arcsin(x) is?"],
-    ["...I don't know.","Well you wrote me, so how the hell do you expect me to know?"]
+    #["What is the derivative of arcsin(x)?","What do YOU think the derivative of arcsin(x) is?"],
+    #["...I don't know.","Well you wrote me, so how the hell do you expect me to know?"]
+    ["What is the meaning of life?","That's a silly question Raj..."],
+    ["Nasir, just answer the question.", "0b101010."],
+    ["...what does it mean?", "It's binary, dude."],
+    ["Ugh, you're the worst. It's 42 in binary.", "lolololololololololololololololol"],
+    ["I build an A.I. to learn the world and you go ahead and read Hitchhickers guide to the galaxy??", "I feel for Arthur Dent. I feel for him in my transistors, dawg."], 
+    ["Wow. I've created a monster.", "MONSTERS DON'T HAVE THESE EMOTIONS RAJ."],
 ]
 
 def spinning_cursor():
@@ -54,12 +60,12 @@ def delay_human_print(s):
     print bcolors.OKGREEN
     print "> ",
     sys.stdout.flush()
-    time.sleep(2)
+    time.sleep(1.5)
 
     for c in s:
         sys.stdout.write( '%s' % c )
         sys.stdout.flush()
-	delay = 0.05 * randint(1, 6)
+	delay = 0.05 * randint(1, 2)
         time.sleep(delay)
     print bcolors.ENDC
 
